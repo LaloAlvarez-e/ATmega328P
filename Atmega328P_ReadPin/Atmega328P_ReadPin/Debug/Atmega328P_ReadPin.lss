@@ -1,0 +1,121 @@
+
+Atmega328P_ReadPin.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000000fa  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000000a6  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000000fa  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000012c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  0000016c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000695  00000000  00000000  0000018c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000610  00000000  00000000  00000821  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000020c  00000000  00000000  00000e31  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  00001040  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000035f  00000000  00000000  00001064  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000010  00000000  00000000  000013c3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
+  78:	0c 94 51 00 	jmp	0xa2	; 0xa2 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <main>:
+#define PBUTTON_READSTATE  (PBUTTON_READPORT & PBUTTON_READPIN)
+
+int main(void)
+{
+    /* Replace with your application code */
+	MCUCR&=~(1<<PUD);    /*Enable global Pull-Up*/
+  80:	85 b7       	in	r24, 0x35	; 53
+  82:	8f 7e       	andi	r24, 0xEF	; 239
+  84:	85 bf       	out	0x35, r24	; 53
+	PBUTTON_DIR   &=~PBUTTON_READPIN;   /*PD.2 (Push Button) as Input*/
+  86:	52 98       	cbi	0x0a, 2	; 10
+	PBUTTON_PULLUP|= PBUTTON_READPIN;   /*PD.2 (Push Button) with Pull-Up*/
+  88:	5a 9a       	sbi	0x0b, 2	; 11
+	
+	LEDRED_DIR   |= LEDRED_PIN;		/*PB.5 (Led RED) as Output*/
+  8a:	25 9a       	sbi	0x04, 5	; 4
+	LEDGREEN_DIR |= LEDGREEN_PIN;		/*PC.5 (Led GREEN) as Output*/
+  8c:	3d 9a       	sbi	0x07, 5	; 7
+	
+	LEDRED_OUT  &=~LEDRED_PIN;		/*PB.5 (Led RED) Output Low*/
+  8e:	2d 98       	cbi	0x05, 5	; 5
+	LEDGREEN_OUT&=~LEDGREEN_PIN;		/*PD.5 (Led GREEN) Output Low*/
+  90:	45 98       	cbi	0x08, 5	; 8
+	
+    while (1) 
+    {
+		if(PBUTTON_READSTATE==PBUTTON_enRELEASE) /*Push Button released*/
+  92:	4a 9b       	sbis	0x09, 2	; 9
+  94:	03 c0       	rjmp	.+6      	; 0x9c <main+0x1c>
+		{
+			LEDRED_OUT  |= LEDRED_PIN; /*PB.5 (Led RED) Output High*/
+  96:	2d 9a       	sbi	0x05, 5	; 5
+			LEDGREEN_OUT&=~LEDGREEN_PIN; /*PC.5 (Led GREEN) Output Low*/
+  98:	45 98       	cbi	0x08, 5	; 8
+  9a:	fb cf       	rjmp	.-10     	; 0x92 <main+0x12>
+		}
+		else /*Push Button pressed PBUTTON_READSTATE=PBUTTON_enPRESS*/
+		{
+			LEDRED_OUT  &=~LEDRED_PIN; /*PB.5 (Led RED) Output Low*/
+  9c:	2d 98       	cbi	0x05, 5	; 5
+			LEDGREEN_OUT|= LEDGREEN_PIN; /*PC.5 (Led GREEN) Output High*/
+  9e:	45 9a       	sbi	0x08, 5	; 8
+  a0:	f8 cf       	rjmp	.-16     	; 0x92 <main+0x12>
+
+000000a2 <_exit>:
+  a2:	f8 94       	cli
+
+000000a4 <__stop_program>:
+  a4:	ff cf       	rjmp	.-2      	; 0xa4 <__stop_program>
