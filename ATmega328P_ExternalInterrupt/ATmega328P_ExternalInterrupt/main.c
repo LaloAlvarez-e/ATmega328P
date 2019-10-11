@@ -120,7 +120,7 @@ void vInitPortInterrupt(void)
 	*   1       1     The rising edge of INT1 generates an interrupt request.
 	*	Same For INT0 (ISC01, ISC00)
 	*/
-	EICRA=(1<<ISC00); /* Any logical change on INT1 generates an interrupt request*/
+	EICRA=(1<<ISC00); /* Any logical change on INT0 generates an interrupt request*/
 	
 	/*
 	*  EIMSK = External Interrupt Mask Register
@@ -185,19 +185,19 @@ ISR(PCINT0_vect)
 			LEDAMBER_OUT|=LEDAMBER_PIN;
 			
 		}
-		else/*Pin change from 0v to 5v Falling edge*/
+		else/*Pin change from 0v to 5v Rising edge*/
 		{
 			LEDAMBER_OUT&=~LEDAMBER_PIN;
 		}
 	}
-	if(u8ActualValuePB2 != u8PreviousValuePB2 )
+	//if(u8ActualValuePB2 != u8PreviousValuePB2 )
 	{
 		if( u8ActualValuePB2==0)/*Pin change from 5v to 0v Falling edge*/
 		{
 			LEDGREEN_OUT|=LEDGREEN_PIN;
 				
 		}
-		else/*Pin change from 0v to 5v Falling edge*/
+		else/*Pin change from 0v to 5v Rising edge*/
 		{
 			LEDGREEN_OUT&=~LEDGREEN_PIN;
 			main_u8Count++;
