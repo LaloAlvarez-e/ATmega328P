@@ -18,9 +18,9 @@ int main(void)
 	uint16_t u16ValuePreviousOV=0;
 	volatile uint8_t u8CountInputPCINT2=0;
 	uint8_t u8CountInputINT0=0;
-	/*Port Init PB5, PC4, PC5 as output and PD2, PB1 and PB1 as Input*/
+	/*Port Init PB5, PC4, PC5 as output and PD2, PB1 and PB2 as Input*/
 	GPIO__vInitPort(); 
-	/*Enable interrut in Input (PD2, BP1 and PB2)*/
+	/*Enable interrupt in Inputs (PD2, PB1 and PB2)*/
 	GPIO__vInitPortInterrupt();
 	
 	/*Set Inmediate Compare value on  OC0A*/
@@ -37,7 +37,7 @@ int main(void)
 	/*Enable Interrupt of Timer Overflow*/
 	Timer0__vEnableInterrupt(Timer0_enInterruptTOIE);
 	
-	/*Intialization of Timer: Normal Mode and CLK div64 ~~ 1.024ms*/
+	/*Intialization of Timer: Normal Mode MAX and CLK div64 ~~ 1.024ms*/
 	Timer0__vInit(Timer0_enModeNormal_MAX,Timer0_enClockDiv64,0);
 	/*Enable Global Interrupt*/
 	sei();
@@ -55,21 +55,21 @@ int main(void)
 			/*This task1 is executed approximately every 1ms*u8CountInputPCINT2 */
 			if((u16ValueOV%(u8CountInputPCINT2+1))==0)
 			{
-				LEDRED_OUT^=LEDRED_PIN;
+				LEDRED_OUT|=LEDRED_PIN;
 			}
-			/*This task2 is executed approximately every 500ms */
-			if((u16ValueOV%(uint16_t)500)==0)
+			/*This task2 is executed approximately every 1024*1.024ms */
+			if((u16ValueOV%(uint16_t)1024)==0)
 			{
-				LEDAMBER_OUT^=LEDAMBER_PIN;
+				LEDAMBER_OUT|=LEDAMBER_PIN;
 				
 			}
-			/*This task3 is executed approximately every 100ms */
-			if(((u16ValueOV)%(100))==0)
+			/*This task3 is executed approximately every 256*1.024ms */
+			if(((u16ValueOV)%(256))==0)
 			{
-				LEDGREEN_OUT^=LEDGREEN_PIN;
+				LEDGREEN_OUT|=LEDGREEN_PIN;
 			}			
-			/*This task4 is executed approximately every 10ms */
-			if(((u16ValueOV)%(10))==0)
+			/*This task4 is executed approximately every 64ms */
+			if(((u16ValueOV)%(64))==0)
 			{
 				/*Task to change pahse of OC0B*/
 				if(u8CountInputINT0>0)

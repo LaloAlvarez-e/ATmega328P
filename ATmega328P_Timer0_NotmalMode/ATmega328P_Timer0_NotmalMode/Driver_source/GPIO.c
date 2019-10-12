@@ -144,8 +144,7 @@ ISR(PCINT0_vect)
 	{
 		if( u8ActualValuePB2==0)/*Pin change from 5v to 0v Falling edge*/
 		{
-			GPIO_u8CountPCINT2++;
-			
+			GPIO_u8CountPCINT2++;	
 		}
 		else/*Pin change from 0v to 5v Rising edge*/
 		{	

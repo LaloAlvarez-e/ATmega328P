@@ -12,6 +12,7 @@ uint8_t Timer0_u8CompareValueOCA=0;
 uint8_t Timer0_u8CompareValueOCB=0;
 void Timer0__vInit(Timer0_nMode enMode, Timer0_nClock enClockSource, uint8_t u8Tick )
 {
+	TCCR0B&=~0x7;
 	TCCR0A&=~((1<<WGM01)|(1<<WGM00));
 	TCCR0B&=~((1<<WGM02));
 	switch (enMode)
@@ -138,11 +139,11 @@ void Timer0__vEnableInterrupt(Timer0_nInterrupt enInterrupt)
 }
 void Timer0__vClearInterrupt(Timer0_nInterrupt enInterrupt)
 {
-	TIMSK0&=~ ((uint8_t)enInterrupt&0x07);
+	TIFR0&=~ ((uint8_t)enInterrupt&0x07);
 	
 }void Timer0__vSetInterrupt(Timer0_nInterrupt enInterrupt)
 {
-	TIMSK0|=((uint8_t)enInterrupt&0x07);
+	TIFR0|=((uint8_t)enInterrupt&0x07);
 }
 void Timer0__vClearCounterOV(void)
 {
@@ -158,10 +159,10 @@ ISR(TIMER0_OVF_vect)
 {
 	Timer0_u16CounterOV++;
 	
-	/*LEDRED_OUT&=~LEDRED_PIN;
+	LEDRED_OUT&=~LEDRED_PIN;
 	LEDAMBER_OUT&=~LEDAMBER_PIN;
 	LEDGREEN_OUT&=~LEDGREEN_PIN;
-	*/
+	
 }
 ISR(TIMER0_COMPA_vect)
 {
@@ -171,6 +172,6 @@ ISR(TIMER0_COMPA_vect)
 ISR(TIMER0_COMPB_vect)
 {
 	OCR0B=Timer0_u8CompareValueOCB;
-	TIMSK0&=~ ((uint8_t)Timer0_enInterruptOCIEA);
+	TIMSK0&=~ ((uint8_t)Timer0_enInterruptOCIEB);
 	
 }
