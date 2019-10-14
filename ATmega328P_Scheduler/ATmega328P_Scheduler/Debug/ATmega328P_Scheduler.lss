@@ -1,0 +1,1050 @@
+
+ATmega328P_Scheduler.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000002  00800100  00000690  00000724  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000690  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000424  00800102  00800102  00000726  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000726  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000758  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000001a0  00000000  00000000  00000798  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00001310  00000000  00000000  00000938  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000a24  00000000  00000000  00001c48  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000af3  00000000  00000000  0000266c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000334  00000000  00000000  00003160  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000af6  00000000  00000000  00003494  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000485  00000000  00000000  00003f8a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000160  00000000  00000000  0000440f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 98 00 	jmp	0x130	; 0x130 <__vector_1>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 a9 00 	jmp	0x152	; 0x152 <__vector_3>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 cb 02 	jmp	0x596	; 0x596 <__vector_14>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 e9       	ldi	r30, 0x90	; 144
+  7c:	f6 e0       	ldi	r31, 0x06	; 6
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a2 30       	cpi	r26, 0x02	; 2
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	25 e0       	ldi	r18, 0x05	; 5
+  8c:	a2 e0       	ldi	r26, 0x02	; 2
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a6 32       	cpi	r26, 0x26	; 38
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 6b 00 	call	0xd6	; 0xd6 <main>
+  9e:	0c 94 46 03 	jmp	0x68c	; 0x68c <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <Task2>:
+		
+	}
+}
+
+void Task2 (void)
+{
+  a6:	ff cf       	rjmp	.-2      	; 0xa6 <Task2>
+
+000000a8 <Task3>:
+	{
+	}
+}
+
+void Task3 (void)
+{
+  a8:	ff cf       	rjmp	.-2      	; 0xa8 <Task3>
+
+000000aa <Task4>:
+
+void Task4 (void)
+{
+	while(1)
+	{
+		PORTB^=(1<<PORTB5);
+  aa:	90 e2       	ldi	r25, 0x20	; 32
+  ac:	85 b1       	in	r24, 0x05	; 5
+  ae:	89 27       	eor	r24, r25
+  b0:	85 b9       	out	0x05, r24	; 5
+  b2:	fc cf       	rjmp	.-8      	; 0xac <Task4+0x2>
+
+000000b4 <Task5>:
+	}
+}
+void Task5 (void)
+{
+	PORTC^=(1<<PORTC5);
+  b4:	98 b1       	in	r25, 0x08	; 8
+  b6:	80 e2       	ldi	r24, 0x20	; 32
+  b8:	89 27       	eor	r24, r25
+  ba:	88 b9       	out	0x08, r24	; 8
+  bc:	08 95       	ret
+
+000000be <Task6>:
+} 
+void Task6 (void)
+{
+	PORTC^=(1<<PORTC4);
+  be:	98 b1       	in	r25, 0x08	; 8
+  c0:	80 e1       	ldi	r24, 0x10	; 16
+  c2:	89 27       	eor	r24, r25
+  c4:	88 b9       	out	0x08, r24	; 8
+  c6:	08 95       	ret
+
+000000c8 <Task1>:
+void Task1(void)
+{	uint8_t u8Status=0;
+	uint16_t u16I=0;
+	while(1)
+	{
+		u8Status = OS__u8StartCriticalSection();
+  c8:	0e 94 15 01 	call	0x22a	; 0x22a <OS__u8StartCriticalSection>
+		PORTC|=(1<<PORTC3);
+  cc:	43 9a       	sbi	0x08, 3	; 8
+		for(u16I=0; u16I<1; u16I++);
+		PORTC&=~(1<<PORTC3);
+  ce:	43 98       	cbi	0x08, 3	; 8
+		for(u16I=0; u16I<1; u16I++);
+		OS__vEndCriticalSection(u8Status);
+  d0:	0e 94 19 01 	call	0x232	; 0x232 <OS__vEndCriticalSection>
+  d4:	f9 cf       	rjmp	.-14     	; 0xc8 <Task1>
+
+000000d6 <main>:
+
+
+
+int main(void)
+{
+	GPIO__vInitPort();
+  d6:	0e 94 86 00 	call	0x10c	; 0x10c <GPIO__vInitPort>
+	OS__enAddPeriodicThreads(&Task5,250,&Task6,500);
+  da:	24 ef       	ldi	r18, 0xF4	; 244
+  dc:	31 e0       	ldi	r19, 0x01	; 1
+  de:	4f e5       	ldi	r20, 0x5F	; 95
+  e0:	50 e0       	ldi	r21, 0x00	; 0
+  e2:	6a ef       	ldi	r22, 0xFA	; 250
+  e4:	70 e0       	ldi	r23, 0x00	; 0
+  e6:	8a e5       	ldi	r24, 0x5A	; 90
+  e8:	90 e0       	ldi	r25, 0x00	; 0
+  ea:	0e 94 9a 01 	call	0x334	; 0x334 <OS__enAddPeriodicThreads>
+	OS__enAddMainThreads(&Task1, &Task2, &Task3, &Task4);
+  ee:	25 e5       	ldi	r18, 0x55	; 85
+  f0:	30 e0       	ldi	r19, 0x00	; 0
+  f2:	44 e5       	ldi	r20, 0x54	; 84
+  f4:	50 e0       	ldi	r21, 0x00	; 0
+  f6:	63 e5       	ldi	r22, 0x53	; 83
+  f8:	70 e0       	ldi	r23, 0x00	; 0
+  fa:	84 e6       	ldi	r24, 0x64	; 100
+  fc:	90 e0       	ldi	r25, 0x00	; 0
+  fe:	0e 94 d9 01 	call	0x3b2	; 0x3b2 <OS__enAddMainThreads>
+	OS__vLaunch();
+ 102:	0e 94 bd 02 	call	0x57a	; 0x57a <OS__vLaunch>
+}
+ 106:	80 e0       	ldi	r24, 0x00	; 0
+ 108:	90 e0       	ldi	r25, 0x00	; 0
+ 10a:	08 95       	ret
+
+0000010c <GPIO__vInitPort>:
+}
+uint8_t GPIO__u8GetCounterRisingINT0(void)
+{
+	return GPIO_u8CountINT0;
+	
+}
+ 10c:	85 b7       	in	r24, 0x35	; 53
+ 10e:	8f 7e       	andi	r24, 0xEF	; 239
+ 110:	85 bf       	out	0x35, r24	; 53
+ 112:	52 98       	cbi	0x0a, 2	; 10
+ 114:	5a 9a       	sbi	0x0b, 2	; 11
+ 116:	22 98       	cbi	0x04, 2	; 4
+ 118:	2a 9a       	sbi	0x05, 2	; 5
+ 11a:	21 98       	cbi	0x04, 1	; 4
+ 11c:	29 9a       	sbi	0x05, 1	; 5
+ 11e:	25 9a       	sbi	0x04, 5	; 4
+ 120:	3c 9a       	sbi	0x07, 4	; 7
+ 122:	3d 9a       	sbi	0x07, 5	; 7
+ 124:	3b 9a       	sbi	0x07, 3	; 7
+ 126:	2d 98       	cbi	0x05, 5	; 5
+ 128:	44 98       	cbi	0x08, 4	; 8
+ 12a:	45 98       	cbi	0x08, 5	; 8
+ 12c:	43 98       	cbi	0x08, 3	; 8
+ 12e:	08 95       	ret
+
+00000130 <__vector_1>:
+
+/*Interrupt for INT0 PD2*/
+ISR(INT0_vect)
+{
+ 130:	1f 92       	push	r1
+ 132:	0f 92       	push	r0
+ 134:	0f b6       	in	r0, 0x3f	; 63
+ 136:	0f 92       	push	r0
+ 138:	11 24       	eor	r1, r1
+ 13a:	8f 93       	push	r24
+	GPIO_u8CountINT0++;
+ 13c:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <__data_end>
+ 140:	8f 5f       	subi	r24, 0xFF	; 255
+ 142:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__data_end>
+}
+ 146:	8f 91       	pop	r24
+ 148:	0f 90       	pop	r0
+ 14a:	0f be       	out	0x3f, r0	; 63
+ 14c:	0f 90       	pop	r0
+ 14e:	1f 90       	pop	r1
+ 150:	18 95       	reti
+
+00000152 <__vector_3>:
+
+ISR(PCINT0_vect)
+{
+ 152:	1f 92       	push	r1
+ 154:	0f 92       	push	r0
+ 156:	0f b6       	in	r0, 0x3f	; 63
+ 158:	0f 92       	push	r0
+ 15a:	11 24       	eor	r1, r1
+ 15c:	2f 93       	push	r18
+ 15e:	8f 93       	push	r24
+ 160:	9f 93       	push	r25
+	static uint8_t u8PreviousValuePB1=(1<<PINB1);
+	static uint8_t u8PreviousValuePB2=(1<<PINB2);
+	
+	uint8_t u8ActualValuePB1=(PINB & (1<<PINB1));
+ 162:	93 b1       	in	r25, 0x03	; 3
+ 164:	92 70       	andi	r25, 0x02	; 2
+	uint8_t u8ActualValuePB2=(PINB & (1<<PINB2));
+ 166:	83 b1       	in	r24, 0x03	; 3
+ 168:	84 70       	andi	r24, 0x04	; 4
+	if(u8ActualValuePB1 != u8PreviousValuePB1 )
+ 16a:	20 91 01 01 	lds	r18, 0x0101	; 0x800101 <u8PreviousValuePB1.1665>
+ 16e:	92 17       	cp	r25, r18
+ 170:	21 f0       	breq	.+8      	; 0x17a <__vector_3+0x28>
+	{
+		if( u8ActualValuePB1==0)/*Pin change from 5v to 0v Falling edge*/
+ 172:	91 11       	cpse	r25, r1
+ 174:	02 c0       	rjmp	.+4      	; 0x17a <__vector_3+0x28>
+		{
+			GPIO_u8CountPCINT2=0;
+ 176:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <GPIO_u8CountPCINT2>
+		}
+		else/*Pin change from 0v to 5v Rising edge*/
+		{
+		}
+	}
+	if(u8ActualValuePB2 != u8PreviousValuePB2 )
+ 17a:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
+ 17e:	82 17       	cp	r24, r18
+ 180:	39 f0       	breq	.+14     	; 0x190 <__vector_3+0x3e>
+	{
+		if( u8ActualValuePB2==0)/*Pin change from 5v to 0v Falling edge*/
+ 182:	81 11       	cpse	r24, r1
+ 184:	05 c0       	rjmp	.+10     	; 0x190 <__vector_3+0x3e>
+		{
+			GPIO_u8CountPCINT2++;	
+ 186:	20 91 03 01 	lds	r18, 0x0103	; 0x800103 <GPIO_u8CountPCINT2>
+ 18a:	2f 5f       	subi	r18, 0xFF	; 255
+ 18c:	20 93 03 01 	sts	0x0103, r18	; 0x800103 <GPIO_u8CountPCINT2>
+		}
+		else/*Pin change from 0v to 5v Rising edge*/
+		{	
+		}
+	}
+	u8PreviousValuePB1=u8ActualValuePB1;
+ 190:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <u8PreviousValuePB1.1665>
+	u8PreviousValuePB2=u8ActualValuePB2;
+ 194:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+}
+ 198:	9f 91       	pop	r25
+ 19a:	8f 91       	pop	r24
+ 19c:	2f 91       	pop	r18
+ 19e:	0f 90       	pop	r0
+ 1a0:	0f be       	out	0x3f, r0	; 63
+ 1a2:	0f 90       	pop	r0
+ 1a4:	1f 90       	pop	r1
+ 1a6:	18 95       	reti
+
+000001a8 <Timer0__vInit>:
+{
+	TIMSK0= ((uint8_t)enInterrupt&0x07);
+	
+}void Timer0__vDisableInterrupt(Timer0_nInterrupt enInterrupt)
+{
+	TIMSK0&=~((uint8_t)enInterrupt&0x07);
+ 1a8:	95 b5       	in	r25, 0x25	; 37
+ 1aa:	98 7f       	andi	r25, 0xF8	; 248
+ 1ac:	95 bd       	out	0x25, r25	; 37
+ 1ae:	94 b5       	in	r25, 0x24	; 36
+ 1b0:	9c 7f       	andi	r25, 0xFC	; 252
+ 1b2:	94 bd       	out	0x24, r25	; 36
+ 1b4:	95 b5       	in	r25, 0x25	; 37
+ 1b6:	97 7f       	andi	r25, 0xF7	; 247
+ 1b8:	95 bd       	out	0x25, r25	; 37
+ 1ba:	83 30       	cpi	r24, 0x03	; 3
+ 1bc:	a1 f0       	breq	.+40     	; 0x1e6 <Timer0__vInit+0x3e>
+ 1be:	28 f4       	brcc	.+10     	; 0x1ca <Timer0__vInit+0x22>
+ 1c0:	81 30       	cpi	r24, 0x01	; 1
+ 1c2:	41 f0       	breq	.+16     	; 0x1d4 <Timer0__vInit+0x2c>
+ 1c4:	82 30       	cpi	r24, 0x02	; 2
+ 1c6:	51 f0       	breq	.+20     	; 0x1dc <Timer0__vInit+0x34>
+ 1c8:	20 c0       	rjmp	.+64     	; 0x20a <Timer0__vInit+0x62>
+ 1ca:	85 30       	cpi	r24, 0x05	; 5
+ 1cc:	81 f0       	breq	.+32     	; 0x1ee <Timer0__vInit+0x46>
+ 1ce:	87 30       	cpi	r24, 0x07	; 7
+ 1d0:	a9 f0       	breq	.+42     	; 0x1fc <Timer0__vInit+0x54>
+ 1d2:	1b c0       	rjmp	.+54     	; 0x20a <Timer0__vInit+0x62>
+ 1d4:	84 b5       	in	r24, 0x24	; 36
+ 1d6:	81 60       	ori	r24, 0x01	; 1
+ 1d8:	84 bd       	out	0x24, r24	; 36
+ 1da:	17 c0       	rjmp	.+46     	; 0x20a <Timer0__vInit+0x62>
+ 1dc:	84 b5       	in	r24, 0x24	; 36
+ 1de:	82 60       	ori	r24, 0x02	; 2
+ 1e0:	84 bd       	out	0x24, r24	; 36
+ 1e2:	47 bd       	out	0x27, r20	; 39
+ 1e4:	12 c0       	rjmp	.+36     	; 0x20a <Timer0__vInit+0x62>
+ 1e6:	84 b5       	in	r24, 0x24	; 36
+ 1e8:	83 60       	ori	r24, 0x03	; 3
+ 1ea:	84 bd       	out	0x24, r24	; 36
+ 1ec:	0e c0       	rjmp	.+28     	; 0x20a <Timer0__vInit+0x62>
+ 1ee:	84 b5       	in	r24, 0x24	; 36
+ 1f0:	81 60       	ori	r24, 0x01	; 1
+ 1f2:	84 bd       	out	0x24, r24	; 36
+ 1f4:	85 b5       	in	r24, 0x25	; 37
+ 1f6:	88 60       	ori	r24, 0x08	; 8
+ 1f8:	85 bd       	out	0x25, r24	; 37
+ 1fa:	47 bd       	out	0x27, r20	; 39
+ 1fc:	84 b5       	in	r24, 0x24	; 36
+ 1fe:	83 60       	ori	r24, 0x03	; 3
+ 200:	84 bd       	out	0x24, r24	; 36
+ 202:	85 b5       	in	r24, 0x25	; 37
+ 204:	88 60       	ori	r24, 0x08	; 8
+ 206:	85 bd       	out	0x25, r24	; 37
+ 208:	47 bd       	out	0x27, r20	; 39
+ 20a:	16 bc       	out	0x26, r1	; 38
+ 20c:	85 b5       	in	r24, 0x25	; 37
+ 20e:	67 70       	andi	r22, 0x07	; 7
+ 210:	68 2b       	or	r22, r24
+ 212:	65 bd       	out	0x25, r22	; 37
+ 214:	08 95       	ret
+
+00000216 <Timer0__vEnableInterrupt>:
+ 216:	87 70       	andi	r24, 0x07	; 7
+ 218:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
+ 21c:	08 95       	ret
+
+0000021e <Timer0__vClearInterrupt>:
+}
+void Timer0__vClearInterrupt(Timer0_nInterrupt enInterrupt)
+{
+	TIFR0&=~ ((uint8_t)enInterrupt&0x07);
+ 21e:	95 b3       	in	r25, 0x15	; 21
+ 220:	87 70       	andi	r24, 0x07	; 7
+ 222:	80 95       	com	r24
+ 224:	98 23       	and	r25, r24
+ 226:	95 bb       	out	0x15, r25	; 21
+ 228:	08 95       	ret
+
+0000022a <OS__u8StartCriticalSection>:
+int8_t   OS_ps8Stacks[NUMTHREADS][STACKSIZE];
+
+
+uint8_t OS__u8StartCriticalSection(void)
+{
+	uint8_t u8State=SREG&0x80;
+ 22a:	8f b7       	in	r24, 0x3f	; 63
+	cli();
+ 22c:	f8 94       	cli
+	return u8State;
+}
+ 22e:	80 78       	andi	r24, 0x80	; 128
+ 230:	08 95       	ret
+
+00000232 <OS__vEndCriticalSection>:
+
+void OS__vEndCriticalSection(uint8_t u8Status)
+{
+	SREG|=u8Status;
+ 232:	9f b7       	in	r25, 0x3f	; 63
+ 234:	89 2b       	or	r24, r25
+ 236:	8f bf       	out	0x3f, r24	; 63
+ 238:	08 95       	ret
+
+0000023a <OS_vSetInitialStack>:
+}
+
+void OS_vSetInitialStack(uint8_t i){
+	OS_sTCBs[i].sp = &OS_ps8Stacks[i][STACKSIZE-36]; // thread stack pointer
+ 23a:	90 e0       	ldi	r25, 0x00	; 0
+ 23c:	fc 01       	movw	r30, r24
+ 23e:	ee 0f       	add	r30, r30
+ 240:	ff 1f       	adc	r31, r31
+ 242:	ee 0f       	add	r30, r30
+ 244:	ff 1f       	adc	r31, r31
+ 246:	ea 5e       	subi	r30, 0xEA	; 234
+ 248:	fa 4f       	sbci	r31, 0xFA	; 250
+ 24a:	98 2f       	mov	r25, r24
+ 24c:	88 27       	eor	r24, r24
+ 24e:	9c 01       	movw	r18, r24
+ 250:	24 51       	subi	r18, 0x14	; 20
+ 252:	3e 4f       	sbci	r19, 0xFE	; 254
+ 254:	31 83       	std	Z+1, r19	; 0x01
+ 256:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-1] = 0x01; // Thumb bit (PC counter low)
+ 258:	80 5f       	subi	r24, 0xF0	; 240
+ 25a:	9e 4f       	sbci	r25, 0xFE	; 254
+ 25c:	fc 01       	movw	r30, r24
+ 25e:	e1 50       	subi	r30, 0x01	; 1
+ 260:	ff 4f       	sbci	r31, 0xFF	; 255
+ 262:	21 e0       	ldi	r18, 0x01	; 1
+ 264:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-2] = 0x02; // Thumb bit (PC counter hight)
+ 266:	31 97       	sbiw	r30, 0x01	; 1
+ 268:	22 e0       	ldi	r18, 0x02	; 2
+ 26a:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-3] = 0x03; // R0
+ 26c:	31 97       	sbiw	r30, 0x01	; 1
+ 26e:	23 e0       	ldi	r18, 0x03	; 3
+ 270:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-4] = 0x04; // SREG
+ 272:	31 97       	sbiw	r30, 0x01	; 1
+ 274:	24 e0       	ldi	r18, 0x04	; 4
+ 276:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-5] = 0x05; // R1
+ 278:	31 97       	sbiw	r30, 0x01	; 1
+ 27a:	25 e0       	ldi	r18, 0x05	; 5
+ 27c:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-6] = 0x06; // R2
+ 27e:	31 97       	sbiw	r30, 0x01	; 1
+ 280:	26 e0       	ldi	r18, 0x06	; 6
+ 282:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-7] = 0x07; // R3
+ 284:	31 97       	sbiw	r30, 0x01	; 1
+ 286:	27 e0       	ldi	r18, 0x07	; 7
+ 288:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-8] = 0x08; // R4
+ 28a:	31 97       	sbiw	r30, 0x01	; 1
+ 28c:	28 e0       	ldi	r18, 0x08	; 8
+ 28e:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-9] = 0x09; // R5
+ 290:	31 97       	sbiw	r30, 0x01	; 1
+ 292:	29 e0       	ldi	r18, 0x09	; 9
+ 294:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-10] = 0x10; // R6
+ 296:	31 97       	sbiw	r30, 0x01	; 1
+ 298:	20 e1       	ldi	r18, 0x10	; 16
+ 29a:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-11] = 0x11; // R7
+ 29c:	31 97       	sbiw	r30, 0x01	; 1
+ 29e:	21 e1       	ldi	r18, 0x11	; 17
+ 2a0:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-12] = 0x12; // R8
+ 2a2:	31 97       	sbiw	r30, 0x01	; 1
+ 2a4:	22 e1       	ldi	r18, 0x12	; 18
+ 2a6:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-13] = 0x13; // R9
+ 2a8:	31 97       	sbiw	r30, 0x01	; 1
+ 2aa:	23 e1       	ldi	r18, 0x13	; 19
+ 2ac:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-14] = 0x14; // R10
+ 2ae:	31 97       	sbiw	r30, 0x01	; 1
+ 2b0:	24 e1       	ldi	r18, 0x14	; 20
+ 2b2:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-15] = 0x15; // R11
+ 2b4:	31 97       	sbiw	r30, 0x01	; 1
+ 2b6:	25 e1       	ldi	r18, 0x15	; 21
+ 2b8:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-16] = 0x16; // R12
+ 2ba:	31 97       	sbiw	r30, 0x01	; 1
+ 2bc:	26 e1       	ldi	r18, 0x16	; 22
+ 2be:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-17] = 0x17; // R13
+ 2c0:	31 97       	sbiw	r30, 0x01	; 1
+ 2c2:	27 e1       	ldi	r18, 0x17	; 23
+ 2c4:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-18] = 0x18; // R14
+ 2c6:	31 97       	sbiw	r30, 0x01	; 1
+ 2c8:	28 e1       	ldi	r18, 0x18	; 24
+ 2ca:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-19] = 0x19; // R15
+ 2cc:	31 97       	sbiw	r30, 0x01	; 1
+ 2ce:	29 e1       	ldi	r18, 0x19	; 25
+ 2d0:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-20] = 0x20; // R16
+ 2d2:	31 97       	sbiw	r30, 0x01	; 1
+ 2d4:	20 e2       	ldi	r18, 0x20	; 32
+ 2d6:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-21] = 0x21; // R17
+ 2d8:	31 97       	sbiw	r30, 0x01	; 1
+ 2da:	21 e2       	ldi	r18, 0x21	; 33
+ 2dc:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-22] = 0x22; // R18
+ 2de:	31 97       	sbiw	r30, 0x01	; 1
+ 2e0:	22 e2       	ldi	r18, 0x22	; 34
+ 2e2:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-23] = 0x23; // R19
+ 2e4:	31 97       	sbiw	r30, 0x01	; 1
+ 2e6:	23 e2       	ldi	r18, 0x23	; 35
+ 2e8:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-24] = 0x24; // R20
+ 2ea:	31 97       	sbiw	r30, 0x01	; 1
+ 2ec:	24 e2       	ldi	r18, 0x24	; 36
+ 2ee:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-25] = 0x25; // R21
+ 2f0:	31 97       	sbiw	r30, 0x01	; 1
+ 2f2:	25 e2       	ldi	r18, 0x25	; 37
+ 2f4:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-26] = 0x26; // R22
+ 2f6:	31 97       	sbiw	r30, 0x01	; 1
+ 2f8:	26 e2       	ldi	r18, 0x26	; 38
+ 2fa:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-27] = 0x27; // R23
+ 2fc:	31 97       	sbiw	r30, 0x01	; 1
+ 2fe:	27 e2       	ldi	r18, 0x27	; 39
+ 300:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-28] = 0x28; // R24
+ 302:	31 97       	sbiw	r30, 0x01	; 1
+ 304:	28 e2       	ldi	r18, 0x28	; 40
+ 306:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-29] = 0x29; // R25
+ 308:	31 97       	sbiw	r30, 0x01	; 1
+ 30a:	29 e2       	ldi	r18, 0x29	; 41
+ 30c:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-30] = 0x30; // R26
+ 30e:	31 97       	sbiw	r30, 0x01	; 1
+ 310:	20 e3       	ldi	r18, 0x30	; 48
+ 312:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-31] = 0x31; // R27
+ 314:	31 97       	sbiw	r30, 0x01	; 1
+ 316:	21 e3       	ldi	r18, 0x31	; 49
+ 318:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-32] = 0x32; // R28
+ 31a:	31 97       	sbiw	r30, 0x01	; 1
+ 31c:	22 e3       	ldi	r18, 0x32	; 50
+ 31e:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-33] = 0x33; // R29
+ 320:	31 97       	sbiw	r30, 0x01	; 1
+ 322:	23 e3       	ldi	r18, 0x33	; 51
+ 324:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-34] = 0x34; // R30
+ 326:	31 97       	sbiw	r30, 0x01	; 1
+ 328:	24 e3       	ldi	r18, 0x34	; 52
+ 32a:	20 83       	st	Z, r18
+	OS_ps8Stacks[i][STACKSIZE-35] = 0x35; // R31
+ 32c:	31 97       	sbiw	r30, 0x01	; 1
+ 32e:	25 e3       	ldi	r18, 0x35	; 53
+ 330:	20 83       	st	Z, r18
+ 332:	08 95       	ret
+
+00000334 <OS__enAddPeriodicThreads>:
+uint16_t OS_u16PeriodTask0=0, OS_u16PeriodTask1=0;
+uint32_t OS_u32MaxPeriod=0;
+OS_nStatus OS__enAddPeriodicThreads(void(*vPeriodicTask0)(void), 
+uint16_t u16PeriodTask0, void(*vPeriodicTask1)(void), uint16_t u16PeriodTask1)
+{
+	OS_vPeriodicTask0=vPeriodicTask0;
+ 334:	90 93 15 05 	sts	0x0515, r25	; 0x800515 <OS_vPeriodicTask0+0x1>
+ 338:	80 93 14 05 	sts	0x0514, r24	; 0x800514 <OS_vPeriodicTask0>
+	OS_vPeriodicTask1=vPeriodicTask1;
+ 33c:	50 93 13 05 	sts	0x0513, r21	; 0x800513 <OS_vPeriodicTask1+0x1>
+ 340:	40 93 12 05 	sts	0x0512, r20	; 0x800512 <OS_vPeriodicTask1>
+	if(u16PeriodTask0!=0)
+ 344:	61 15       	cp	r22, r1
+ 346:	71 05       	cpc	r23, r1
+ 348:	29 f0       	breq	.+10     	; 0x354 <OS__enAddPeriodicThreads+0x20>
+		OS_u16PeriodTask0=u16PeriodTask0;
+ 34a:	70 93 0f 01 	sts	0x010F, r23	; 0x80010f <OS_u16PeriodTask0+0x1>
+ 34e:	60 93 0e 01 	sts	0x010E, r22	; 0x80010e <OS_u16PeriodTask0>
+ 352:	06 c0       	rjmp	.+12     	; 0x360 <OS__enAddPeriodicThreads+0x2c>
+	else
+		OS_u16PeriodTask0=1;
+ 354:	81 e0       	ldi	r24, 0x01	; 1
+ 356:	90 e0       	ldi	r25, 0x00	; 0
+ 358:	90 93 0f 01 	sts	0x010F, r25	; 0x80010f <OS_u16PeriodTask0+0x1>
+ 35c:	80 93 0e 01 	sts	0x010E, r24	; 0x80010e <OS_u16PeriodTask0>
+	if(u16PeriodTask1!=0)
+ 360:	21 15       	cp	r18, r1
+ 362:	31 05       	cpc	r19, r1
+ 364:	29 f0       	breq	.+10     	; 0x370 <OS__enAddPeriodicThreads+0x3c>
+		OS_u16PeriodTask1=u16PeriodTask1;
+ 366:	30 93 0d 01 	sts	0x010D, r19	; 0x80010d <OS_u16PeriodTask1+0x1>
+ 36a:	20 93 0c 01 	sts	0x010C, r18	; 0x80010c <OS_u16PeriodTask1>
+ 36e:	06 c0       	rjmp	.+12     	; 0x37c <OS__enAddPeriodicThreads+0x48>
+	else
+		OS_u16PeriodTask1=1;
+ 370:	81 e0       	ldi	r24, 0x01	; 1
+ 372:	90 e0       	ldi	r25, 0x00	; 0
+ 374:	90 93 0d 01 	sts	0x010D, r25	; 0x80010d <OS_u16PeriodTask1+0x1>
+ 378:	80 93 0c 01 	sts	0x010C, r24	; 0x80010c <OS_u16PeriodTask1>
+		
+	OS_u32MaxPeriod= (OS_u16PeriodTask0*OS_u16PeriodTask1);
+ 37c:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <OS_u16PeriodTask0>
+ 380:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <OS_u16PeriodTask0+0x1>
+ 384:	20 91 0c 01 	lds	r18, 0x010C	; 0x80010c <OS_u16PeriodTask1>
+ 388:	30 91 0d 01 	lds	r19, 0x010D	; 0x80010d <OS_u16PeriodTask1+0x1>
+ 38c:	42 9f       	mul	r20, r18
+ 38e:	c0 01       	movw	r24, r0
+ 390:	43 9f       	mul	r20, r19
+ 392:	90 0d       	add	r25, r0
+ 394:	52 9f       	mul	r21, r18
+ 396:	90 0d       	add	r25, r0
+ 398:	11 24       	eor	r1, r1
+ 39a:	a0 e0       	ldi	r26, 0x00	; 0
+ 39c:	b0 e0       	ldi	r27, 0x00	; 0
+ 39e:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <OS_u32MaxPeriod>
+ 3a2:	90 93 09 01 	sts	0x0109, r25	; 0x800109 <OS_u32MaxPeriod+0x1>
+ 3a6:	a0 93 0a 01 	sts	0x010A, r26	; 0x80010a <OS_u32MaxPeriod+0x2>
+ 3aa:	b0 93 0b 01 	sts	0x010B, r27	; 0x80010b <OS_u32MaxPeriod+0x3>
+	return OS_enOK;
+}
+ 3ae:	80 e0       	ldi	r24, 0x00	; 0
+ 3b0:	08 95       	ret
+
+000003b2 <OS__enAddMainThreads>:
+
+OS_nStatus OS__enAddMainThreads(void(*vTask0)(void),
+void(*vTask1)(void),
+void(*vTask2)(void),
+void(*vTask3)(void)){
+ 3b2:	9f 92       	push	r9
+ 3b4:	af 92       	push	r10
+ 3b6:	bf 92       	push	r11
+ 3b8:	cf 92       	push	r12
+ 3ba:	df 92       	push	r13
+ 3bc:	ef 92       	push	r14
+ 3be:	ff 92       	push	r15
+ 3c0:	0f 93       	push	r16
+ 3c2:	1f 93       	push	r17
+ 3c4:	cf 93       	push	r28
+ 3c6:	df 93       	push	r29
+ 3c8:	98 2e       	mov	r9, r24
+ 3ca:	a9 2e       	mov	r10, r25
+ 3cc:	b6 2e       	mov	r11, r22
+ 3ce:	c7 2e       	mov	r12, r23
+ 3d0:	d4 2e       	mov	r13, r20
+ 3d2:	e5 2e       	mov	r14, r21
+ 3d4:	f2 2e       	mov	r15, r18
+ 3d6:	03 2f       	mov	r16, r19
+	uint8_t u8Status;
+	u8Status = OS__u8StartCriticalSection();
+ 3d8:	0e 94 15 01 	call	0x22a	; 0x22a <OS__u8StartCriticalSection>
+ 3dc:	18 2f       	mov	r17, r24
+	OS_sTCBs[0].next = &OS_sTCBs[1]; // 0 points to 1
+ 3de:	c6 e1       	ldi	r28, 0x16	; 22
+ 3e0:	d5 e0       	ldi	r29, 0x05	; 5
+ 3e2:	8a e1       	ldi	r24, 0x1A	; 26
+ 3e4:	95 e0       	ldi	r25, 0x05	; 5
+ 3e6:	9b 83       	std	Y+3, r25	; 0x03
+ 3e8:	8a 83       	std	Y+2, r24	; 0x02
+	OS_sTCBs[1].next = &OS_sTCBs[2]; // 1 points to 2
+ 3ea:	8e e1       	ldi	r24, 0x1E	; 30
+ 3ec:	95 e0       	ldi	r25, 0x05	; 5
+ 3ee:	9f 83       	std	Y+7, r25	; 0x07
+ 3f0:	8e 83       	std	Y+6, r24	; 0x06
+	OS_sTCBs[2].next = &OS_sTCBs[3]; // 2 points to 0
+ 3f2:	82 e2       	ldi	r24, 0x22	; 34
+ 3f4:	95 e0       	ldi	r25, 0x05	; 5
+ 3f6:	9b 87       	std	Y+11, r25	; 0x0b
+ 3f8:	8a 87       	std	Y+10, r24	; 0x0a
+	OS_sTCBs[3].next = &OS_sTCBs[0]; // 2 points to 0
+ 3fa:	df 87       	std	Y+15, r29	; 0x0f
+ 3fc:	ce 87       	std	Y+14, r28	; 0x0e
+
+	OS_vSetInitialStack(0); 
+ 3fe:	80 e0       	ldi	r24, 0x00	; 0
+ 400:	0e 94 1d 01 	call	0x23a	; 0x23a <OS_vSetInitialStack>
+	OS_ps8Stacks[0][STACKSIZE-1] =((int16_t)vTask0)&0xFF; // PC
+ 404:	90 92 0f 02 	sts	0x020F, r9	; 0x80020f <OS_ps8Stacks+0xff>
+	OS_ps8Stacks[0][STACKSIZE-2] = (((int16_t)vTask0)>>8)&0xFF; // PC
+ 408:	a0 92 0e 02 	sts	0x020E, r10	; 0x80020e <OS_ps8Stacks+0xfe>
+	OS_vSetInitialStack(1); 
+ 40c:	81 e0       	ldi	r24, 0x01	; 1
+ 40e:	0e 94 1d 01 	call	0x23a	; 0x23a <OS_vSetInitialStack>
+	OS_ps8Stacks[1][STACKSIZE-1] =((int16_t)vTask1)&0xFF; // PC
+ 412:	b0 92 0f 03 	sts	0x030F, r11	; 0x80030f <OS_ps8Stacks+0x1ff>
+	OS_ps8Stacks[1][STACKSIZE-2] = (((int16_t)vTask1)>>8)&0xFF; // PC
+ 416:	c0 92 0e 03 	sts	0x030E, r12	; 0x80030e <OS_ps8Stacks+0x1fe>
+	OS_vSetInitialStack(2);
+ 41a:	82 e0       	ldi	r24, 0x02	; 2
+ 41c:	0e 94 1d 01 	call	0x23a	; 0x23a <OS_vSetInitialStack>
+	OS_ps8Stacks[2][STACKSIZE-1] =((int16_t)vTask2)&0xFF; // PC
+ 420:	d0 92 0f 04 	sts	0x040F, r13	; 0x80040f <OS_ps8Stacks+0x2ff>
+	OS_ps8Stacks[2][STACKSIZE-2] = (((int16_t)vTask2)>>8)&0xFF; // PC
+ 424:	e0 92 0e 04 	sts	0x040E, r14	; 0x80040e <OS_ps8Stacks+0x2fe>
+	OS_vSetInitialStack(3);
+ 428:	83 e0       	ldi	r24, 0x03	; 3
+ 42a:	0e 94 1d 01 	call	0x23a	; 0x23a <OS_vSetInitialStack>
+	OS_ps8Stacks[3][STACKSIZE-1] =((int16_t)vTask3)&0xFF; // PC
+ 42e:	f0 92 0f 05 	sts	0x050F, r15	; 0x80050f <OS_ps8Stacks+0x3ff>
+	OS_ps8Stacks[3][STACKSIZE-2] = (((int16_t)vTask3)>>8)&0xFF; // PC
+ 432:	00 93 0e 05 	sts	0x050E, r16	; 0x80050e <OS_ps8Stacks+0x3fe>
+	OS_psRunPt = &OS_sTCBs[0];        // thread 0 will run first
+ 436:	d0 93 11 05 	sts	0x0511, r29	; 0x800511 <OS_psRunPt+0x1>
+ 43a:	c0 93 10 05 	sts	0x0510, r28	; 0x800510 <OS_psRunPt>
+	OS__vEndCriticalSection(u8Status);
+ 43e:	81 2f       	mov	r24, r17
+ 440:	0e 94 19 01 	call	0x232	; 0x232 <OS__vEndCriticalSection>
+	return OS_enOK; // successful
+}
+ 444:	80 e0       	ldi	r24, 0x00	; 0
+ 446:	df 91       	pop	r29
+ 448:	cf 91       	pop	r28
+ 44a:	1f 91       	pop	r17
+ 44c:	0f 91       	pop	r16
+ 44e:	ff 90       	pop	r15
+ 450:	ef 90       	pop	r14
+ 452:	df 90       	pop	r13
+ 454:	cf 90       	pop	r12
+ 456:	bf 90       	pop	r11
+ 458:	af 90       	pop	r10
+ 45a:	9f 90       	pop	r9
+ 45c:	08 95       	ret
+
+0000045e <OS_vScheduler>:
+
+void OS_vScheduler(void)
+{	
+	static uint32_t u32Count= 0;
+	u32Count%=OS_u32MaxPeriod;
+ 45e:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <u32Count.1775>
+ 462:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <u32Count.1775+0x1>
+ 466:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <u32Count.1775+0x2>
+ 46a:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <u32Count.1775+0x3>
+ 46e:	20 91 08 01 	lds	r18, 0x0108	; 0x800108 <OS_u32MaxPeriod>
+ 472:	30 91 09 01 	lds	r19, 0x0109	; 0x800109 <OS_u32MaxPeriod+0x1>
+ 476:	40 91 0a 01 	lds	r20, 0x010A	; 0x80010a <OS_u32MaxPeriod+0x2>
+ 47a:	50 91 0b 01 	lds	r21, 0x010B	; 0x80010b <OS_u32MaxPeriod+0x3>
+ 47e:	0e 94 24 03 	call	0x648	; 0x648 <__udivmodsi4>
+ 482:	60 93 04 01 	sts	0x0104, r22	; 0x800104 <u32Count.1775>
+ 486:	70 93 05 01 	sts	0x0105, r23	; 0x800105 <u32Count.1775+0x1>
+ 48a:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <u32Count.1775+0x2>
+ 48e:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <u32Count.1775+0x3>
+	 if(((uint32_t)u32Count%(uint32_t)OS_u16PeriodTask0) == 0)
+ 492:	20 91 0e 01 	lds	r18, 0x010E	; 0x80010e <OS_u16PeriodTask0>
+ 496:	30 91 0f 01 	lds	r19, 0x010F	; 0x80010f <OS_u16PeriodTask0+0x1>
+ 49a:	40 e0       	ldi	r20, 0x00	; 0
+ 49c:	50 e0       	ldi	r21, 0x00	; 0
+ 49e:	0e 94 24 03 	call	0x648	; 0x648 <__udivmodsi4>
+ 4a2:	67 2b       	or	r22, r23
+ 4a4:	68 2b       	or	r22, r24
+ 4a6:	69 2b       	or	r22, r25
+ 4a8:	29 f4       	brne	.+10     	; 0x4b4 <OS_vScheduler+0x56>
+	 { 
+		 OS_vPeriodicTask0();
+ 4aa:	e0 91 14 05 	lds	r30, 0x0514	; 0x800514 <OS_vPeriodicTask0>
+ 4ae:	f0 91 15 05 	lds	r31, 0x0515	; 0x800515 <OS_vPeriodicTask0+0x1>
+ 4b2:	09 95       	icall
+	 }
+	 if(((uint32_t)u32Count%(uint32_t)OS_u16PeriodTask1) == 0)
+ 4b4:	20 91 0c 01 	lds	r18, 0x010C	; 0x80010c <OS_u16PeriodTask1>
+ 4b8:	30 91 0d 01 	lds	r19, 0x010D	; 0x80010d <OS_u16PeriodTask1+0x1>
+ 4bc:	40 e0       	ldi	r20, 0x00	; 0
+ 4be:	50 e0       	ldi	r21, 0x00	; 0
+ 4c0:	60 91 04 01 	lds	r22, 0x0104	; 0x800104 <u32Count.1775>
+ 4c4:	70 91 05 01 	lds	r23, 0x0105	; 0x800105 <u32Count.1775+0x1>
+ 4c8:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <u32Count.1775+0x2>
+ 4cc:	90 91 07 01 	lds	r25, 0x0107	; 0x800107 <u32Count.1775+0x3>
+ 4d0:	0e 94 24 03 	call	0x648	; 0x648 <__udivmodsi4>
+ 4d4:	67 2b       	or	r22, r23
+ 4d6:	68 2b       	or	r22, r24
+ 4d8:	69 2b       	or	r22, r25
+ 4da:	29 f4       	brne	.+10     	; 0x4e6 <OS_vScheduler+0x88>
+	 { 
+		 OS_vPeriodicTask1();
+ 4dc:	e0 91 12 05 	lds	r30, 0x0512	; 0x800512 <OS_vPeriodicTask1>
+ 4e0:	f0 91 13 05 	lds	r31, 0x0513	; 0x800513 <OS_vPeriodicTask1+0x1>
+ 4e4:	09 95       	icall
+	 }	
+	u32Count++;
+ 4e6:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <u32Count.1775>
+ 4ea:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <u32Count.1775+0x1>
+ 4ee:	a0 91 06 01 	lds	r26, 0x0106	; 0x800106 <u32Count.1775+0x2>
+ 4f2:	b0 91 07 01 	lds	r27, 0x0107	; 0x800107 <u32Count.1775+0x3>
+ 4f6:	01 96       	adiw	r24, 0x01	; 1
+ 4f8:	a1 1d       	adc	r26, r1
+ 4fa:	b1 1d       	adc	r27, r1
+ 4fc:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <u32Count.1775>
+ 500:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <u32Count.1775+0x1>
+ 504:	a0 93 06 01 	sts	0x0106, r26	; 0x800106 <u32Count.1775+0x2>
+ 508:	b0 93 07 01 	sts	0x0107, r27	; 0x800107 <u32Count.1775+0x3>
+	OS_psRunPt = OS_psRunPt->next; // Round Robin scheduler
+ 50c:	e0 91 10 05 	lds	r30, 0x0510	; 0x800510 <OS_psRunPt>
+ 510:	f0 91 11 05 	lds	r31, 0x0511	; 0x800511 <OS_psRunPt+0x1>
+ 514:	82 81       	ldd	r24, Z+2	; 0x02
+ 516:	93 81       	ldd	r25, Z+3	; 0x03
+ 518:	90 93 11 05 	sts	0x0511, r25	; 0x800511 <OS_psRunPt+0x1>
+ 51c:	80 93 10 05 	sts	0x0510, r24	; 0x800510 <OS_psRunPt>
+ 520:	08 95       	ret
+
+00000522 <OS_vStartOS>:
+	OS_vStartOS();                   // start on the first task
+}
+
+void OS_vStartOS(void)
+{
+	asm volatile (
+ 522:	e0 91 10 05 	lds	r30, 0x0510	; 0x800510 <OS_psRunPt>
+ 526:	f0 91 11 05 	lds	r31, 0x0511	; 0x800511 <OS_psRunPt+0x1>
+ 52a:	01 90       	ld	r0, Z+
+ 52c:	10 80       	ld	r1, Z
+ 52e:	0d be       	out	0x3d, r0	; 61
+ 530:	1e be       	out	0x3e, r1	; 62
+ 532:	ff 91       	pop	r31
+ 534:	ef 91       	pop	r30
+ 536:	df 91       	pop	r29
+ 538:	cf 91       	pop	r28
+ 53a:	bf 91       	pop	r27
+ 53c:	af 91       	pop	r26
+ 53e:	9f 91       	pop	r25
+ 540:	8f 91       	pop	r24
+ 542:	7f 91       	pop	r23
+ 544:	6f 91       	pop	r22
+ 546:	5f 91       	pop	r21
+ 548:	4f 91       	pop	r20
+ 54a:	3f 91       	pop	r19
+ 54c:	2f 91       	pop	r18
+ 54e:	1f 91       	pop	r17
+ 550:	0f 91       	pop	r16
+ 552:	ff 90       	pop	r15
+ 554:	ef 90       	pop	r14
+ 556:	df 90       	pop	r13
+ 558:	cf 90       	pop	r12
+ 55a:	bf 90       	pop	r11
+ 55c:	af 90       	pop	r10
+ 55e:	9f 90       	pop	r9
+ 560:	8f 90       	pop	r8
+ 562:	7f 90       	pop	r7
+ 564:	6f 90       	pop	r6
+ 566:	5f 90       	pop	r5
+ 568:	4f 90       	pop	r4
+ 56a:	3f 90       	pop	r3
+ 56c:	2f 90       	pop	r2
+ 56e:	1f 90       	pop	r1
+ 570:	0f 90       	pop	r0
+ 572:	0f be       	out	0x3f, r0	; 63
+ 574:	0f 90       	pop	r0
+ 576:	78 94       	sei
+ 578:	08 95       	ret
+
+0000057a <OS__vLaunch>:
+}
+
+void OS__vLaunch(void){
+
+	/*Clear pending Interrupt of Timer Overflow*/
+	Timer0__vClearInterrupt(Timer0_enInterruptOCIEA);
+ 57a:	82 e0       	ldi	r24, 0x02	; 2
+ 57c:	0e 94 0f 01 	call	0x21e	; 0x21e <Timer0__vClearInterrupt>
+	/*Enable Interrupt of Timer Overflow*/
+	Timer0__vEnableInterrupt(Timer0_enInterruptOCIEA);
+ 580:	82 e0       	ldi	r24, 0x02	; 2
+ 582:	0e 94 0b 01 	call	0x216	; 0x216 <Timer0__vEnableInterrupt>
+	
+	/*Intialization of Timer: Normal Mode MAX and CLK div64 ~~ 1ms*/
+	Timer0__vInit(Timer0_enModeNormal_OCRA,Timer0_enClockDiv64,251);
+ 586:	4b ef       	ldi	r20, 0xFB	; 251
+ 588:	63 e0       	ldi	r22, 0x03	; 3
+ 58a:	82 e0       	ldi	r24, 0x02	; 2
+ 58c:	0e 94 d4 00 	call	0x1a8	; 0x1a8 <Timer0__vInit>
+
+	OS_vStartOS();                   // start on the first task
+ 590:	0e 94 91 02 	call	0x522	; 0x522 <OS_vStartOS>
+ 594:	08 95       	ret
+
+00000596 <__vector_14>:
+
+
+// Task switching, ISR_NAKED is necessary to prevent compiler to manipulate the stack
+ISR(TIMER0_COMPA_vect, ISR_NAKED) //1) Saves PC
+{
+	asm volatile (
+ 596:	f8 94       	cli
+ 598:	0f 92       	push	r0
+ 59a:	0f b6       	in	r0, 0x3f	; 63
+ 59c:	0f 92       	push	r0
+ 59e:	1f 92       	push	r1
+ 5a0:	2f 92       	push	r2
+ 5a2:	3f 92       	push	r3
+ 5a4:	4f 92       	push	r4
+ 5a6:	5f 92       	push	r5
+ 5a8:	6f 92       	push	r6
+ 5aa:	7f 92       	push	r7
+ 5ac:	8f 92       	push	r8
+ 5ae:	9f 92       	push	r9
+ 5b0:	af 92       	push	r10
+ 5b2:	bf 92       	push	r11
+ 5b4:	cf 92       	push	r12
+ 5b6:	df 92       	push	r13
+ 5b8:	ef 92       	push	r14
+ 5ba:	ff 92       	push	r15
+ 5bc:	0f 93       	push	r16
+ 5be:	1f 93       	push	r17
+ 5c0:	2f 93       	push	r18
+ 5c2:	3f 93       	push	r19
+ 5c4:	4f 93       	push	r20
+ 5c6:	5f 93       	push	r21
+ 5c8:	6f 93       	push	r22
+ 5ca:	7f 93       	push	r23
+ 5cc:	8f 93       	push	r24
+ 5ce:	9f 93       	push	r25
+ 5d0:	af 93       	push	r26
+ 5d2:	bf 93       	push	r27
+ 5d4:	cf 93       	push	r28
+ 5d6:	df 93       	push	r29
+ 5d8:	ef 93       	push	r30
+ 5da:	ff 93       	push	r31
+ 5dc:	0d b6       	in	r0, 0x3d	; 61
+ 5de:	1e b6       	in	r1, 0x3e	; 62
+ 5e0:	e0 91 10 05 	lds	r30, 0x0510	; 0x800510 <OS_psRunPt>
+ 5e4:	f0 91 11 05 	lds	r31, 0x0511	; 0x800511 <OS_psRunPt+0x1>
+ 5e8:	01 92       	st	Z+, r0
+ 5ea:	10 82       	st	Z, r1
+ 5ec:	0e 94 2f 02 	call	0x45e	; 0x45e <OS_vScheduler>
+ 5f0:	e0 91 10 05 	lds	r30, 0x0510	; 0x800510 <OS_psRunPt>
+ 5f4:	f0 91 11 05 	lds	r31, 0x0511	; 0x800511 <OS_psRunPt+0x1>
+ 5f8:	01 90       	ld	r0, Z+
+ 5fa:	10 80       	ld	r1, Z
+ 5fc:	0d be       	out	0x3d, r0	; 61
+ 5fe:	1e be       	out	0x3e, r1	; 62
+ 600:	ff 91       	pop	r31
+ 602:	ef 91       	pop	r30
+ 604:	df 91       	pop	r29
+ 606:	cf 91       	pop	r28
+ 608:	bf 91       	pop	r27
+ 60a:	af 91       	pop	r26
+ 60c:	9f 91       	pop	r25
+ 60e:	8f 91       	pop	r24
+ 610:	7f 91       	pop	r23
+ 612:	6f 91       	pop	r22
+ 614:	5f 91       	pop	r21
+ 616:	4f 91       	pop	r20
+ 618:	3f 91       	pop	r19
+ 61a:	2f 91       	pop	r18
+ 61c:	1f 91       	pop	r17
+ 61e:	0f 91       	pop	r16
+ 620:	ff 90       	pop	r15
+ 622:	ef 90       	pop	r14
+ 624:	df 90       	pop	r13
+ 626:	cf 90       	pop	r12
+ 628:	bf 90       	pop	r11
+ 62a:	af 90       	pop	r10
+ 62c:	9f 90       	pop	r9
+ 62e:	8f 90       	pop	r8
+ 630:	7f 90       	pop	r7
+ 632:	6f 90       	pop	r6
+ 634:	5f 90       	pop	r5
+ 636:	4f 90       	pop	r4
+ 638:	3f 90       	pop	r3
+ 63a:	2f 90       	pop	r2
+ 63c:	1f 90       	pop	r1
+ 63e:	0f 90       	pop	r0
+ 640:	0f be       	out	0x3f, r0	; 63
+ 642:	0f 90       	pop	r0
+ 644:	78 94       	sei
+ 646:	18 95       	reti
+
+00000648 <__udivmodsi4>:
+ 648:	a1 e2       	ldi	r26, 0x21	; 33
+ 64a:	1a 2e       	mov	r1, r26
+ 64c:	aa 1b       	sub	r26, r26
+ 64e:	bb 1b       	sub	r27, r27
+ 650:	fd 01       	movw	r30, r26
+ 652:	0d c0       	rjmp	.+26     	; 0x66e <__udivmodsi4_ep>
+
+00000654 <__udivmodsi4_loop>:
+ 654:	aa 1f       	adc	r26, r26
+ 656:	bb 1f       	adc	r27, r27
+ 658:	ee 1f       	adc	r30, r30
+ 65a:	ff 1f       	adc	r31, r31
+ 65c:	a2 17       	cp	r26, r18
+ 65e:	b3 07       	cpc	r27, r19
+ 660:	e4 07       	cpc	r30, r20
+ 662:	f5 07       	cpc	r31, r21
+ 664:	20 f0       	brcs	.+8      	; 0x66e <__udivmodsi4_ep>
+ 666:	a2 1b       	sub	r26, r18
+ 668:	b3 0b       	sbc	r27, r19
+ 66a:	e4 0b       	sbc	r30, r20
+ 66c:	f5 0b       	sbc	r31, r21
+
+0000066e <__udivmodsi4_ep>:
+ 66e:	66 1f       	adc	r22, r22
+ 670:	77 1f       	adc	r23, r23
+ 672:	88 1f       	adc	r24, r24
+ 674:	99 1f       	adc	r25, r25
+ 676:	1a 94       	dec	r1
+ 678:	69 f7       	brne	.-38     	; 0x654 <__udivmodsi4_loop>
+ 67a:	60 95       	com	r22
+ 67c:	70 95       	com	r23
+ 67e:	80 95       	com	r24
+ 680:	90 95       	com	r25
+ 682:	9b 01       	movw	r18, r22
+ 684:	ac 01       	movw	r20, r24
+ 686:	bd 01       	movw	r22, r26
+ 688:	cf 01       	movw	r24, r30
+ 68a:	08 95       	ret
+
+0000068c <_exit>:
+ 68c:	f8 94       	cli
+
+0000068e <__stop_program>:
+ 68e:	ff cf       	rjmp	.-2      	; 0x68e <__stop_program>
