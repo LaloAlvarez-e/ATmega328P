@@ -43,8 +43,11 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../APP_source/Colors.c \
+../APP_source/ILI9163.c \
 ../APP_source/main.c \
 ../Driver_source/GPIO.c \
+../Driver_source/SPI.c \
 ../Driver_source/Timer0.c \
 ../OS_source/OS.c
 
@@ -56,26 +59,38 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+APP_source/Colors.o \
+APP_source/ILI9163.o \
 APP_source/main.o \
 Driver_source/GPIO.o \
+Driver_source/SPI.o \
 Driver_source/Timer0.o \
 OS_source/OS.o
 
 OBJS_AS_ARGS +=  \
+APP_source/Colors.o \
+APP_source/ILI9163.o \
 APP_source/main.o \
 Driver_source/GPIO.o \
+Driver_source/SPI.o \
 Driver_source/Timer0.o \
 OS_source/OS.o
 
 C_DEPS +=  \
+APP_source/Colors.d \
+APP_source/ILI9163.d \
 APP_source/main.d \
 Driver_source/GPIO.d \
+Driver_source/SPI.d \
 Driver_source/Timer0.d \
 OS_source/OS.d
 
 C_DEPS_AS_ARGS +=  \
+APP_source/Colors.d \
+APP_source/ILI9163.d \
 APP_source/main.d \
 Driver_source/GPIO.d \
+Driver_source/SPI.d \
 Driver_source/Timer0.d \
 OS_source/OS.d
 
@@ -93,6 +108,20 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+APP_source/Colors.o: ../APP_source/Colors.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Tools\IDE\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../Driver_header" -I"../APP_header" -I"../OS_header"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+APP_source/ILI9163.o: ../APP_source/ILI9163.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Tools\IDE\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../Driver_header" -I"../APP_header" -I"../OS_header"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 APP_source/main.o: ../APP_source/main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -101,6 +130,13 @@ APP_source/main.o: ../APP_source/main.c
 	
 
 Driver_source/GPIO.o: ../Driver_source/GPIO.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Tools\IDE\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../Driver_header" -I"../APP_header" -I"../OS_header"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Driver_source/SPI.o: ../Driver_source/SPI.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Tools\IDE\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../Driver_header" -I"../APP_header" -I"../OS_header"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Tools\IDE\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

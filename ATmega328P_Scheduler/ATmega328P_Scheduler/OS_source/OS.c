@@ -134,6 +134,36 @@ void OS_vScheduler(void)
 	OS_psRunPt = OS_psRunPt->next; // Round Robin scheduler
 }
 
+/* SpinLock semaphore*/
+
+void OS__vInitSemaphore(int8_t *ps8Semaphore, SEMAPHORE_nTypeInit enInitValue)
+{
+	*ps8Semaphore=(int8_t)enInitValue;
+}
+
+void OS__vWaitSemaphore(int8_t *ps8Semaphore)
+{
+	uint8_t u8Status;
+	u8Status = OS__u8StartCriticalSection();
+	/*Wait until data are available*/
+	while(*ps8Semaphore == 0){
+	sei(); /* interrupts can occur here*/
+	cli();
+	}
+	*ps8Semaphore = (*ps8Semaphore) - 1;
+	OS__vEndCriticalSection(u8Status);
+} 
+
+void OS__vSignalSemaphore(int8_t *ps8Semaphore)
+{
+	uint8_t u8Status;
+	u8Status = OS__u8StartCriticalSection();
+	*ps8Semaphore = (*ps8Semaphore) + 1;
+	OS__vEndCriticalSection(u8Status);
+}
+
+
+
 void OS__vLaunch(void){
 
 	/*Clear pending Interrupt of Timer Overflow*/

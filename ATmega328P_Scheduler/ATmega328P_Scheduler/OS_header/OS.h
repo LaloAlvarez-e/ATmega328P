@@ -30,6 +30,8 @@ typedef enum
 
 
 void OS__vLaunch(void);
+
+/*Threads*/
 OS_nStatus OS__enAddMainThreads(void(*vTask0)(void),
 void(*vTask1)(void),
 void(*vTask2)(void),
@@ -39,7 +41,18 @@ uint16_t u16PeriodTask0,
 void(*vPeriodicTask1)(void), 
 uint16_t u16PeriodTask1);
 
+typedef enum
+{
+	SEMAPHORE_enInitSYNC =0, /* 0 means event not occurs, 1 event occurs*/
+	SEMAPHORE_enInitMUTEX=1, /* 1 means free, 0 busy*/
+}SEMAPHORE_nTypeInit;
 
+/*SpinLock Semaphore (MUTEX MUTual EXclusion)*/
+void OS__vInitSemaphore(int8_t *ps8Semaphore, SEMAPHORE_nTypeInit enInitValue);
+void OS__vWaitSemaphore(int8_t *ps8Semaphore);
+void OS__vSignalSemaphore(int8_t *ps8Semaphore);
+
+/*Critical Sections*/
 uint8_t OS__u8StartCriticalSection(void);
 void OS__vEndCriticalSection(uint8_t u8Status);
 
