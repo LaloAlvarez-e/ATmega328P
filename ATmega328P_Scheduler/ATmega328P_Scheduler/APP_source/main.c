@@ -26,10 +26,10 @@ int main(void)
 {
 	uint8_t u8Column=0, u8Row=0;
 	GPIO__vInitPort();
-	NOKIA5110__vInit();
-	NOKIA5110__vSetCursor(0,0);
-	NOKIA5110__vClear();
-	NOKIA5110__u16Print("InDev Mutex\n\rBoton 1:\n\rBoton 2:",&u8Column,&u8Row);
+	//NOKIA5110__vInit();
+	//NOKIA5110__vSetCursor(0,0);
+	//NOKIA5110__vClear();
+	//NOKIA5110__u16Print("InDev Mutex\n\rBoton 1:\n\rBoton 2:",&u8Column,&u8Row);
 	OS__vInitSemaphore(&MAIN_s8SemaphoreSPI,SEMAPHORE_enInitMUTEX);
 	OS__enAddPeriodicThreads(&Task5,250,&Task6,100);
 	OS__enAddMainThreads(&Task1, &Task2);
@@ -51,7 +51,7 @@ void Task1(void)
 		u8Row=1;
 		//CONV__u8UIntToString(10,&TASK1_cConv[0]);
 		OS__vWaitSemaphore(&MAIN_s8SemaphoreSPI);
-		NOKIA5110__u8SendString((char*)TASK1_cConv,&u8Column,&u8Row);
+		//NOKIA5110__u8SendString((char*)TASK1_cConv,&u8Column,&u8Row);
 		LEDGREEN_OUT^=LEDGREEN_PIN;
 		OS__vSignalSemaphore(&MAIN_s8SemaphoreSPI);
 		for(i=0;i<50000ul;i++);
