@@ -22,7 +22,7 @@ int main(void)
 {
 	
 	GPIO__vInitPort();
-	ILI9163__vInit();
+	//ILI9163__vInit();
 	OS__enAddPeriodicThreads(&Task5,250,&Task6,100);
 	OS__enAddMainThreads(&Task1, &Task2, &Task3, &Task4);
 	OS__vLaunch();
@@ -31,6 +31,7 @@ int main(void)
 uint8_t u8Flag=0;
 void Task1(void)
 {	
+	volatile char temp[10];
 	uint8_t u8Status=0;
 	static uint16_t u16Color=0;
 	uint16_t u16I=0;
@@ -40,11 +41,20 @@ void Task1(void)
 		u8Status = OS__u8StartCriticalSection();
 		if(u8Flag==1)
 		{
-			ILI9163__vClear(COLORS_u16Values[u16Color]);
+			
+			temp[10];
+			//ILI9163__vClear(COLORS_u16Values[u16Color]);
 			if(u16Color<COLORS_MAX)
+			{
 				u16Color++;
+				temp[0]=u16Color++;
+			}
 			else
+			{
+				
+				temp[5]+=u16Color++;
 				u16Color=0;
+			}
 			u8Flag=0;
 			
 		}
