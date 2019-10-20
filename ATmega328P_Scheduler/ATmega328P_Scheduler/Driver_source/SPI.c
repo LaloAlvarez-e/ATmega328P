@@ -102,25 +102,25 @@ void SPI__vInitPin(SPI_nPin enPin)
 {
 	if((enPin&SPI_enPinCLK)==SPI_enPinCLK)
 	{
-		DDRB|=(1<<DDB5);
-		PORTB&=~(1<<PORTB5);
+		DDRB|=(1<<DDB1);
+		PORTB&=~(1<<PORTB1);
 	}
 	
 	if((enPin&SPI_enPinMISO)==SPI_enPinMISO)
 	{
-		DDRB&=~(1<<DDB4);
-		PORTB|=(1<<PORTB4);		
+		DDRB&=~(1<<DDB3);
+		PORTB|=(1<<PORTB3);		
 	}
 			
 	if((enPin&SPI_enPinMOSI)==SPI_enPinMOSI)
 	{
-		DDRB|=(1<<DDB3);
-		PORTB&=~(1<<PORTB3);
+		DDRB|=(1<<DDB2);
+		PORTB&=~(1<<PORTB2);
 	}
 	if((enPin&SPI_enPinSS)==SPI_enPinSS)
 	{
-		DDRB|=(1<<DDB2);
-		PORTB|=(1<<DDB2);
+		DDRB|=(1<<DDB0);
+		PORTB|=(1<<DDB0);
 
 	}		
 }
@@ -128,25 +128,25 @@ void SPI__vDeInitPin(SPI_nPin enPin)
 {
 	if((enPin&SPI_enPinCLK)==SPI_enPinCLK)
 	{
-		DDRB&=~(1<<DDB5);
-		PORTB&=~(1<<PORTB5);
+		DDRB&=~(1<<DDB1);
+		PORTB&=~(1<<PORTB1);
 	}
 	
 	if((enPin&SPI_enPinMISO)==SPI_enPinMISO)
 	{
-		DDRB&=~(1<<DDB4);
-		PORTB&=~(1<<PORTB4);
+		DDRB&=~(1<<DDB3);
+		PORTB&=~(1<<PORTB3);
 	}
 	
 	if((enPin&SPI_enPinMOSI)==SPI_enPinMOSI)
 	{
-		DDRB&=~(1<<DDB3);
-		PORTB&=~(1<<PORTB3);
+		DDRB&=~(1<<DDB2);
+		PORTB&=~(1<<PORTB2);
 	}
 	if((enPin&SPI_enPinSS)==SPI_enPinSS)
 	{
-		DDRB&=~(1<<DDB2);
-		PORTB&=~(1<<PORTB2);
+		DDRB&=~(1<<DDB0);
+		PORTB&=~(1<<PORTB0);
 	}	
 }
 
@@ -155,7 +155,7 @@ void SPI__vSendReceiveDataMaster(uint8_t* pu8DataOut, uint8_t* pu8DataIn, int16_
 	if((SPSR&(1<<SPIF))==(1<<SPIF))
 	*pu8DataIn=SPDR;
 		
-	PORTB&=~(1<<DDB2);
+	PORTB&=~(1<<DDB0);
 	while((uint16_t)s16DataNumber>0)
 	{
 		SPCR|=(1<<MSTR);
@@ -167,5 +167,24 @@ void SPI__vSendReceiveDataMaster(uint8_t* pu8DataOut, uint8_t* pu8DataIn, int16_
 		s16DataNumber--;
 	}
 	
-	PORTB|=(1<<DDB2);
+	PORTB|=(1<<DDB0);
+}
+void SPI__vSendDataMaster(uint8_t* pu8DataOut,int16_t s16DataNumber )
+{
+	uint8_t u8Dummy=0;
+	if((SPSR&(1<<SPIF))==(1<<SPIF))
+	u8Dummy=SPDR;
+	
+	PORTB&=~(1<<DDB0);
+	while((uint16_t)s16DataNumber>0)
+	{
+		SPCR|=(1<<MSTR);
+		SPDR=*pu8DataOut;
+		while((SPSR&(1<<SPIF))==0);
+		u8Dummy=SPDR;
+		pu8DataOut++;
+		s16DataNumber--;
+	}
+	
+	PORTB|=(1<<DDB0);
 }

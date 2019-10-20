@@ -68,7 +68,7 @@ void SPI__vEnableInterrupt(void);
 void SPI__vDisableInterrupt(void);
 
 void SPI__vSendReceiveDataMaster(uint8_t* pu8DataOut, uint8_t* pu8DataIn, int16_t s16DataNumber );
-
+void SPI__vSendDataMaster(uint8_t* pu8DataOut,int16_t s16DataNumber );
 
 
 

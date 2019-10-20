@@ -91,15 +91,16 @@ uint16_t u16PeriodTask0, void(*vPeriodicTask1)(void), uint16_t u16PeriodTask1)
 }
 
 OS_nStatus OS__enAddMainThreads(void(*vTask0)(void),
-void(*vTask1)(void),
+void(*vTask1)(void))
+/*,
 void(*vTask2)(void),
-void(*vTask3)(void)){
+void(*vTask3)(void))*/{
 	uint8_t u8Status;
 	u8Status = OS__u8StartCriticalSection();
 	OS_sTCBs[0].next = &OS_sTCBs[1]; // 0 points to 1
-	OS_sTCBs[1].next = &OS_sTCBs[2]; // 1 points to 2
-	OS_sTCBs[2].next = &OS_sTCBs[3]; // 2 points to 0
-	OS_sTCBs[3].next = &OS_sTCBs[0]; // 2 points to 0
+	OS_sTCBs[1].next = &OS_sTCBs[0]; // 1 points to 2
+	//OS_sTCBs[2].next = &OS_sTCBs[3]; // 2 points to 0
+	//OS_sTCBs[3].next = &OS_sTCBs[0]; // 2 points to 0
 
 	OS_vSetInitialStack(0); 
 	OS_ps8Stacks[0][STACKSIZE-1] =((int16_t)vTask0)&0xFF; // PC
@@ -107,12 +108,13 @@ void(*vTask3)(void)){
 	OS_vSetInitialStack(1); 
 	OS_ps8Stacks[1][STACKSIZE-1] =((int16_t)vTask1)&0xFF; // PC
 	OS_ps8Stacks[1][STACKSIZE-2] = (((int16_t)vTask1)>>8)&0xFF; // PC
-	OS_vSetInitialStack(2);
+	/*OS_vSetInitialStack(2);
 	OS_ps8Stacks[2][STACKSIZE-1] =((int16_t)vTask2)&0xFF; // PC
 	OS_ps8Stacks[2][STACKSIZE-2] = (((int16_t)vTask2)>>8)&0xFF; // PC
 	OS_vSetInitialStack(3);
 	OS_ps8Stacks[3][STACKSIZE-1] =((int16_t)vTask3)&0xFF; // PC
 	OS_ps8Stacks[3][STACKSIZE-2] = (((int16_t)vTask3)>>8)&0xFF; // PC
+	*/
 	OS_psRunPt = &OS_sTCBs[0];        // thread 0 will run first
 	OS__vEndCriticalSection(u8Status);
 	return OS_enOK; // successful

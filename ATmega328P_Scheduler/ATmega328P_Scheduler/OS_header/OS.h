@@ -13,8 +13,8 @@
 #include <avr/interrupt.h>
 #include <Timer0.h>
 
-#define NUMTHREADS  (4)        // maximum number of threads
-#define STACKSIZE   (0x100)      // number of 8-bit words in stack per thread
+#define NUMTHREADS  (2)        // maximum number of threads
+#define STACKSIZE   (0x350)      // number of 8-bit words in stack per thread
 
 struct TCB{ //Thread control block
 	int8_t *sp;       // pointer to stack (valid for threads not running)
@@ -33,9 +33,11 @@ void OS__vLaunch(void);
 
 /*Threads*/
 OS_nStatus OS__enAddMainThreads(void(*vTask0)(void),
-void(*vTask1)(void),
+void(*vTask1)(void));
+/*,
 void(*vTask2)(void),
 void(*vTask3)(void));
+*/
 OS_nStatus OS__enAddPeriodicThreads(void(*vPeriodicTask0)(void), 
 uint16_t u16PeriodTask0,
 void(*vPeriodicTask1)(void), 
