@@ -26,10 +26,10 @@ int main(void)
 {
 	uint8_t u8Column=0, u8Row=0;
 	GPIO__vInitPort();
-	//NOKIA5110__vInit();
-	//NOKIA5110__vSetCursor(0,0);
-	//NOKIA5110__vClear();
-	//NOKIA5110__u16Print("InDev Mutex\n\rBoton 1:\n\rBoton 2:",&u8Column,&u8Row);
+	NOKIA5110__vInit();
+	NOKIA5110__vSetCursor(0,0);
+	NOKIA5110__vClear();
+	NOKIA5110__u16Print("InDev Mutex\n\rBoton 1:\n\rBoton 2:",&u8Column,&u8Row);
 	OS__vInitSemaphore(&MAIN_s8SemaphoreSPI,SEMAPHORE_enInitMUTEX);
 	OS__enAddPeriodicThreads(&Task5,250,&Task6,100);
 	OS__enAddMainThreads(&Task1, &Task2);
@@ -37,7 +37,7 @@ int main(void)
 }
 void Task1(void)
 {
-	char TASK1_cConv[10]="Hola";
+	char TASK1_cConv[10]=" ";
 	uint8_t u8Column=9, u8Row=1,u8Status=0;
 	uint16_t u16ValueBoton=0;
 	uint16_t i=0;
@@ -49,20 +49,18 @@ void Task1(void)
 		OS__vEndCriticalSection(u8Status);
 		u8Column=9;
 		u8Row=1;
-		//CONV__u8UIntToString(10,&TASK1_cConv[0]);
+		CONV__u8UIntToString(u16ValueBoton,&TASK1_cConv[0]);
 		OS__vWaitSemaphore(&MAIN_s8SemaphoreSPI);
-		//NOKIA5110__u8SendString((char*)TASK1_cConv,&u8Column,&u8Row);
-		LEDGREEN_OUT^=LEDGREEN_PIN;
+		//NOKIA5110__u8SendString((char*)"9",&u8Column,&u8Row);
+		LEDGREEN_OUT|=LEDGREEN_PIN;
 		OS__vSignalSemaphore(&MAIN_s8SemaphoreSPI);
-		for(i=0;i<50000ul;i++);
-		for(i=0;i<50000ul;i++);
 		
 	}
 }
 
 void Task2 (void)
 {
-	char TASK1_cConv[10];
+	char TASK2_cConv[10]=" ";
 	uint8_t u8Column=9, u8Row=2,u8Status=0;
 	uint16_t u16ValueBoton=0;
 	uint16_t i=0;
@@ -74,14 +72,12 @@ void Task2 (void)
 		OS__vEndCriticalSection(u8Status);
 		u8Column=9;
 		u8Row=2;
-		CONV__u8UIntToString(10,&TASK1_cConv[0]);
+		CONV__u8UIntToString(u16ValueBoton,&TASK2_cConv[0]);
 		OS__vWaitSemaphore(&MAIN_s8SemaphoreSPI);
-		LEDRED_OUT^=LEDRED_PIN;
-		NOKIA5110__vSetCursorChar(u8Column,u8Row);
-		NOKIA5110__vSendChar((char)'O');
+		//NOKIA5110__u8SendString((char*)"10",&u8Column,&u8Row);
+		LEDGREEN_OUT&=~LEDGREEN_PIN;
 		OS__vSignalSemaphore(&MAIN_s8SemaphoreSPI);
-		for(i=0;i<50000ul;i++);
-		for(i=0;i<50000ul;i++);
+		
 	}
 }
 
@@ -110,7 +106,7 @@ void Task5 (void)
 		if(u8Actual==0)
 		{
 			LEDAMBER_OUT&=~LEDAMBER_PIN;
-			//MAIN_u8CountBUTTON2++;
+			MAIN_u8CountBUTTON2++;
 		}
 		
 	}

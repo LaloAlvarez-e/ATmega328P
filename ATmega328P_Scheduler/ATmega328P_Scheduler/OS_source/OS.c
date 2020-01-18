@@ -32,39 +32,39 @@ void OS_vSetInitialStack(uint8_t i){
 	OS_sTCBs[i].sp = &OS_ps8Stacks[i][STACKSIZE-36]; // thread stack pointer
 	OS_ps8Stacks[i][STACKSIZE-1] = 0x01; // Thumb bit (PC counter low)
 	OS_ps8Stacks[i][STACKSIZE-2] = 0x02; // Thumb bit (PC counter hight)
-	OS_ps8Stacks[i][STACKSIZE-3] = 0x03; // R0
-	OS_ps8Stacks[i][STACKSIZE-4] = 0x04; // SREG
-	OS_ps8Stacks[i][STACKSIZE-5] = 0x05; // R1
-	OS_ps8Stacks[i][STACKSIZE-6] = 0x06; // R2
-	OS_ps8Stacks[i][STACKSIZE-7] = 0x07; // R3
-	OS_ps8Stacks[i][STACKSIZE-8] = 0x08; // R4
-	OS_ps8Stacks[i][STACKSIZE-9] = 0x09; // R5
-	OS_ps8Stacks[i][STACKSIZE-10] = 0x10; // R6
-	OS_ps8Stacks[i][STACKSIZE-11] = 0x11; // R7
-	OS_ps8Stacks[i][STACKSIZE-12] = 0x12; // R8
-	OS_ps8Stacks[i][STACKSIZE-13] = 0x13; // R9
-	OS_ps8Stacks[i][STACKSIZE-14] = 0x14; // R10
-	OS_ps8Stacks[i][STACKSIZE-15] = 0x15; // R11
-	OS_ps8Stacks[i][STACKSIZE-16] = 0x16; // R12
-	OS_ps8Stacks[i][STACKSIZE-17] = 0x17; // R13
-	OS_ps8Stacks[i][STACKSIZE-18] = 0x18; // R14
-	OS_ps8Stacks[i][STACKSIZE-19] = 0x19; // R15
-	OS_ps8Stacks[i][STACKSIZE-20] = 0x20; // R16
-	OS_ps8Stacks[i][STACKSIZE-21] = 0x21; // R17
-	OS_ps8Stacks[i][STACKSIZE-22] = 0x22; // R18
-	OS_ps8Stacks[i][STACKSIZE-23] = 0x23; // R19
-	OS_ps8Stacks[i][STACKSIZE-24] = 0x24; // R20
-	OS_ps8Stacks[i][STACKSIZE-25] = 0x25; // R21
-	OS_ps8Stacks[i][STACKSIZE-26] = 0x26; // R22
-	OS_ps8Stacks[i][STACKSIZE-27] = 0x27; // R23
-	OS_ps8Stacks[i][STACKSIZE-28] = 0x28; // R24
-	OS_ps8Stacks[i][STACKSIZE-29] = 0x29; // R25
-	OS_ps8Stacks[i][STACKSIZE-30] = 0x30; // R26
-	OS_ps8Stacks[i][STACKSIZE-31] = 0x31; // R27
-	OS_ps8Stacks[i][STACKSIZE-32] = 0x32; // R28
-	OS_ps8Stacks[i][STACKSIZE-33] = 0x33; // R29
-	OS_ps8Stacks[i][STACKSIZE-34] = 0x34; // R30
-	OS_ps8Stacks[i][STACKSIZE-35] = 0x35; // R31
+	OS_ps8Stacks[i][STACKSIZE-3] = 0x80; // R31
+	OS_ps8Stacks[i][STACKSIZE-4] = 0x80; // SREG
+	OS_ps8Stacks[i][STACKSIZE-5] = 0x05; // R30
+	OS_ps8Stacks[i][STACKSIZE-6] = 0x06; // R29
+	OS_ps8Stacks[i][STACKSIZE-7] = 0x07; // R28
+	OS_ps8Stacks[i][STACKSIZE-8] = 0x08; // R27
+	OS_ps8Stacks[i][STACKSIZE-9] = 0x09; // R26
+	OS_ps8Stacks[i][STACKSIZE-10] = 0x10; // R25
+	OS_ps8Stacks[i][STACKSIZE-11] = 0x11; // R24
+	OS_ps8Stacks[i][STACKSIZE-12] = 0x12; // R23
+	OS_ps8Stacks[i][STACKSIZE-13] = 0x13; // R22
+	OS_ps8Stacks[i][STACKSIZE-14] = 0x14; // R21
+	OS_ps8Stacks[i][STACKSIZE-15] = 0x15; // R20
+	OS_ps8Stacks[i][STACKSIZE-16] = 0x16; // R19
+	OS_ps8Stacks[i][STACKSIZE-17] = 0x17; // R18
+	OS_ps8Stacks[i][STACKSIZE-18] = 0x18; // R17
+	OS_ps8Stacks[i][STACKSIZE-19] = 0x19; // R16
+	OS_ps8Stacks[i][STACKSIZE-20] = 0x20; // R15
+	OS_ps8Stacks[i][STACKSIZE-21] = 0x21; // R14
+	OS_ps8Stacks[i][STACKSIZE-22] = 0x22; // R13
+	OS_ps8Stacks[i][STACKSIZE-23] = 0x23; // R12
+	OS_ps8Stacks[i][STACKSIZE-24] = 0x24; // R11
+	OS_ps8Stacks[i][STACKSIZE-25] = 0x25; // R10
+	OS_ps8Stacks[i][STACKSIZE-26] = 0x26; // R09
+	OS_ps8Stacks[i][STACKSIZE-27] = 0x27; // R08
+	OS_ps8Stacks[i][STACKSIZE-28] = 0x28; // R07
+	OS_ps8Stacks[i][STACKSIZE-29] = 0x29; // R06
+	OS_ps8Stacks[i][STACKSIZE-30] = 0x30; // R05
+	OS_ps8Stacks[i][STACKSIZE-31] = 0x31; // R04
+	OS_ps8Stacks[i][STACKSIZE-32] = 0x32; // R03
+	OS_ps8Stacks[i][STACKSIZE-33] = 0x33; // R02
+	OS_ps8Stacks[i][STACKSIZE-34] = 0x00; // R01
+	OS_ps8Stacks[i][STACKSIZE-35] = 0x35; // R00
 
 }
 
@@ -91,10 +91,7 @@ uint16_t u16PeriodTask0, void(*vPeriodicTask1)(void), uint16_t u16PeriodTask1)
 }
 
 OS_nStatus OS__enAddMainThreads(void(*vTask0)(void),
-void(*vTask1)(void))
-/*,
-void(*vTask2)(void),
-void(*vTask3)(void))*/{
+void(*vTask1)(void)){
 	uint8_t u8Status;
 	u8Status = OS__u8StartCriticalSection();
 	OS_sTCBs[0].next = &OS_sTCBs[1]; // 0 points to 1
@@ -188,41 +185,40 @@ void OS_vStartOS(void)
 	"LD		 r1,Z ;  \n\t"
 	"OUT     __SP_L__, r0  ;Save SP into R0 and R1\n\t "
 	"OUT     __SP_H__, r1  \n\t "
-	"POP    r31\n\t "
-	"POP    r30\n\t "
-	"POP    r29\n\t "
-	"POP    r28\n\t "
-	"POP    r27\n\t "
-	"POP    r26\n\t "
-	"POP    r25\n\t "
-	"POP    r24\n\t "
-	"POP    r23\n\t "
-	"POP    r22\n\t "
-	"POP    r21\n\t "
-	"POP    r20\n\t "
-	"POP    r19\n\t "
-	"POP    r18\n\t "
-	"POP    r17\n\t "
-	"POP    r16\n\t "
-	"POP    r15\n\t "
-	"POP    r14\n\t "
-	"POP    r13\n\t "
-	"POP    r12\n\t "
-	"POP    r11\n\t "
-	"POP    r10\n\t "
-	"POP    r9\n\t "
-	"POP    r8\n\t "
-	"POP    r7\n\t "
-	"POP    r6\n\t "
-	"POP    r5\n\t "
-	"POP    r4\n\t "
-	"POP    r3\n\t "
-	"POP    r2\n\t "
+	"POP    r0\n\t "
 	"POP    r1\n\t "
-	"POP    r0\n\t "
-	"OUT    __SREG__,r0 ;\n\t "
-	"POP    r0\n\t "
-	"SEI \n\t" 
+	"POP    r2\n\t "
+	"POP    r3\n\t "
+	"POP    r4\n\t "
+	"POP    r5\n\t "
+	"POP    r6\n\t "
+	"POP    r7\n\t "
+	"POP    r8\n\t "
+	"POP    r9\n\t "
+	"POP    r10\n\t "
+	"POP    r11\n\t "
+	"POP    r12\n\t "
+	"POP    r13\n\t "
+	"POP    r14\n\t "
+	"POP    r15\n\t "
+	"POP    r16\n\t "
+	"POP    r17\n\t "
+	"POP    r18\n\t "
+	"POP    r19\n\t "
+	"POP    r20\n\t "
+	"POP    r21\n\t "
+	"POP    r22\n\t "
+	"POP    r23\n\t "
+	"POP    r24\n\t "
+	"POP    r25\n\t "
+	"POP    r26\n\t "
+	"POP    r27\n\t "
+	"POP    r28\n\t "
+	"POP    r29\n\t "
+	"POP    r30\n\t "
+	"POP    r31\n\t "
+	"OUT    __SREG__,r31 ;\n\t "
+	"POP    r31\n\t "
 	);
 }
 
@@ -234,41 +230,41 @@ void OS_vStartOS(void)
 ISR(TIMER0_COMPA_vect, ISR_NAKED) //1) Saves PC
 {
 	asm volatile (
-	"CLI ;2) Prevent interrupt during switch \n\t "
-	"PUSH	r0				   ; 3) Save remaining regs R0-R31, SREG and SP \n\t "
-	"IN      r0, __SREG__ ;\n\t "
-	"PUSH    r0 ;\n\t "
-	"PUSH    r1 ;\n\t "
-	"PUSH    r2 ;\n\t "
-	"PUSH    r3 ;\n\t "
-	"PUSH    r4 ;\n\t "
-	"PUSH    r5 ;\n\t "
-	"PUSH    r6 ;\n\t "
-	"PUSH    r7 ;\n\t "
-	"PUSH    r8 ;\n\t "
-	"PUSH    r9 ;\n\t "
-	"PUSH    r10 ;\n\t "
-	"PUSH    r11 ;\n\t "
-	"PUSH    r12 ;\n\t "
-	"PUSH    r13 ;\n\t "
-	"PUSH    r14 ;\n\t "
-	"PUSH    r15 ;\n\t "
-	"PUSH    r16 ;\n\t "
-	"PUSH    r17 ;\n\t "
+	"PUSH    r31 ;\n\t "
+	"IN     r31,__SREG__ ;\n\t "
+	"PUSH    r31 ;\n\t "
+	"PUSH    r30 ;\n\t "
+	"PUSH    r29 \n\t "
+	"PUSH    r28 ;\n\t "
+	"PUSH    r27 ;\n\t "
+	"PUSH    r26 ;\n\t "
+	"PUSH    r25 ;\n\t "
+	"PUSH    r24 ;\n\t "
+	"PUSH    r23 ;\n\t "
+	"PUSH    r22 ;\n\t "
+	"PUSH    r21 ;\n\t "
+	"PUSH    r20 ;\n\t "
+	"PUSH    r19 ;\n\t "
 	"PUSH    r18 ;\n\t "
-	"PUSH    r19\n\t "
-	"PUSH    r20\n\t "
-	"PUSH    r21\n\t "
-	"PUSH    r22\n\t "
-	"PUSH    r23\n\t "
-	"PUSH    r24\n\t "
-	"PUSH    r25\n\t "
-	"PUSH    r26\n\t "
-	"PUSH    r27\n\t "
-	"PUSH    r28\n\t "
-	"PUSH    r29\n\t "
-	"PUSH    r30\n\t "
-	"PUSH    r31\n\t "
+	"PUSH    r17 ;\n\t "
+	"PUSH    r16 ;\n\t "
+	"PUSH    r15 ;\n\t "
+	"PUSH    r14 ;\n\t "
+	"PUSH    r13 ;\n\t "
+	"PUSH    r12 ;\n\t "
+	"PUSH    r11\n\t "
+	"PUSH    r10\n\t "
+	"PUSH    r9\n\t "
+	"PUSH    r8\n\t "
+	"PUSH    r7\n\t "
+	"PUSH    r6\n\t "
+	"PUSH    r5\n\t "
+	"PUSH    r4\n\t "
+	"PUSH    r3\n\t "
+	"PUSH    r2\n\t "
+	"PUSH    r1\n\t "
+	"PUSH    r0\n\t "
+	
 	"IN      r0, __SP_L__ ;Save SP into R0 and R1\n\t "
 	"IN      r1, __SP_H__ \n\t "
 	"LDS 	 ZL, OS_psRunPt ; Initialize Yh pointer with OS_psRunPt \n\t"
@@ -286,42 +282,40 @@ ISR(TIMER0_COMPA_vect, ISR_NAKED) //1) Saves PC
 	"OUT	 __SP_L__, r0 ; \n\t"
 	"OUT	 __SP_H__, r1 ; \n\t"
 	
-	"POP    r31\n\t "
-	"POP    r30\n\t "
-	"POP    r29\n\t "
-	"POP    r28\n\t "
-	"POP    r27\n\t "
-	"POP    r26\n\t "
-	"POP    r25\n\t "
-	"POP    r24\n\t "
-	"POP    r23\n\t "
-	"POP    r22\n\t "
-	"POP    r21\n\t "
-	"POP    r20\n\t "
-	"POP    r19\n\t "
-	"POP    r18\n\t "
-	"POP    r17\n\t "
-	"POP    r16\n\t "
-	"POP    r15\n\t "
-	"POP    r14\n\t "
-	"POP    r13\n\t "
-	"POP    r12\n\t "
-	"POP    r11\n\t "
-	"POP    r10\n\t "
-	"POP    r9\n\t "
-	"POP    r8\n\t "
-	"POP    r7\n\t "
-	"POP    r6\n\t "
-	"POP    r5\n\t "
-	"POP    r4\n\t "
-	"POP    r3\n\t "
-	"POP    r2\n\t "
+	"POP    r0\n\t "
 	"POP    r1\n\t "
-	"POP    r0\n\t "
-	"OUT    __SREG__,r0 ;\n\t "
-	"POP    r0\n\t "
-	
-	"SEI ;2) Prevent interrupt during switch \n\t "
+	"POP    r2\n\t "
+	"POP    r3\n\t "
+	"POP    r4\n\t "
+	"POP    r5\n\t "
+	"POP    r6\n\t "
+	"POP    r7\n\t "
+	"POP    r8\n\t "
+	"POP    r9\n\t "
+	"POP    r10\n\t "
+	"POP    r11\n\t "
+	"POP    r12\n\t "
+	"POP    r13\n\t "
+	"POP    r14\n\t "
+	"POP    r15\n\t "
+	"POP    r16\n\t "
+	"POP    r17\n\t "
+	"POP    r18\n\t "
+	"POP    r19\n\t "
+	"POP    r20\n\t "
+	"POP    r21\n\t "
+	"POP    r22\n\t "
+	"POP    r23\n\t "
+	"POP    r24\n\t "
+	"POP    r25\n\t "
+	"POP    r26\n\t "
+	"POP    r27\n\t "
+	"POP    r28\n\t "
+	"POP    r29\n\t "
+	"POP    r30\n\t "
+	"POP    r31\n\t "
+	"OUT    __SREG__,r31 \n\t "
+	"POP    r31 \n\t "
 	"RETI  \n\t"
 	);
 }
